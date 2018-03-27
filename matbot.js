@@ -228,7 +228,7 @@ app.use(express.static(__dirname + '/public'));
 // set the home page route
 app.get('/', (request, response) => {
     // ejs render automatically looks in the views folder
-    response.render('public/Index.html');
+    response.render('hey');
 });
 
 app.listen(port, () => {
@@ -238,5 +238,5 @@ app.listen(port, () => {
 
 // pings server every 15 minutes to prevent dynos from sleeping
 setInterval(() => {
- http.get('http://antimatbot.herokuapp.com/');
+ http.get('http://avasional.herokuapp.com/');
 }, 900000);
