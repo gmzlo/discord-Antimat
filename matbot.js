@@ -8,7 +8,7 @@ const fs = require("fs");
 
 const comBD = require('./data/comBD.json', 'utf8');
 
-const BotVersion = "0.0.16";
+const BotVersion = "0.0.17";
 
 const swearWords = ["гей", "пидор", "Пидор", "Гея", "гея", "Пидоры", "пидоры", "педик", "Педик", "Пидора", "проститука", "проституточка", "Проституточка", "проституток", "Проституток", "Проститука", "проституки", "Проституки", "задрот", "Задрот", "пидора", "пидарок", "Пидарок", "пидop", "Пидop", "Гей"];
 
@@ -27,16 +27,20 @@ robot.channels.find("id", process.env.LOG_CHANNALE).send(`**Лог**: Функц
 });
 
 robot.on('ready', () => { 
-    robot.channels.find("id", process.env.LOG_CHANNALE).send(`**Лог**: Функция **ready** - Бот заходит на **${robot.user.username}**!
+    robot.channels.find("id", process.env.LOG_CHANNALE).send(`**Лог**: Функция **ready** - Бот заходит на **${robot.user.username}  [ID ${robot.user.id}]**!
+	**log**: Функция **ready** - Работает для **${robot.guilds.size} Серверов**!
+**${robot.channels.size}** Каналов и **${robot.users.size}** Пользователей Подсчитано!
 **Лог**: Функция **set game** - присвоина игра **Анти Мат Фильтр**
 **Лог**: Функция **Version** - Автор бота = **Neko**
 Версия Бота = **${BotVersion}**
 -------------------------------------------------------------------`)
 robot.user.setGame("Анти Мат Фильтр")
-console.log(`Бот Готов
-присвоина игра Анти Мат Фильтр
-Автор бота = Neko
-Версия Бота = ${BotVersion}`)
+console.log(`Бот заходит на ${robot.user.username}  [ID ${robot.user.id}]!`)
+console.log(`Работает для ${robot.guilds.size} Серверов!`)
+console.log(`${robot.channels.size} Каналов и ${robot.users.size} Пользователей Подсчитано!`)
+console.log(`присвоина игра Анти Мат Фильтр`)
+console.log(`Автор бота = Neko`)
+console.log(`Версия Бота = ${BotVersion}`)
 });
 
 robot.on('disconnect',() => {
@@ -234,5 +238,5 @@ app.listen(port, () => {
 
 // pings server every 15 minutes to prevent dynos from sleeping
 setInterval(() => {
- http.get('http://avasional.herokuapp.com/');
+ http.get('http://antimatbot.herokuapp.com/');
 }, 900000);
