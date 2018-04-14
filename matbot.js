@@ -8,11 +8,13 @@ const fs = require("fs");
 
 const comBD = require('./data/comBD.json', 'utf8');
 
-const BotVersion = "0.0.17";
+const BotVersion = "0.0.19";
 
 const swearWords = ["гей", "пидор", "Пидор", "Гея", "гея", "Пидоры", "пидоры", "педик", "Педик", "Пидора", "проститука", "проституточка", "Проституточка", "проституток", "Проституток", "Проститука", "проституки", "Проституки", "задрот", "Задрот", "пидора", "пидарок", "Пидарок", "пидop", "Пидop", "Гей"];
 
+const sleepWords =["не хочу спать", "Не хочу спать", "не хочу Спать", "Не Хочу Спать", "у меня безссоннится", "У меня безссоннится", "у Меня безссоннится", "у меня Безссоннится", "У Меня Безссоннится", "у меня бессонница", "у Меня бессонница", "у меня Бессонница", "У Меня Бессонница", "У меня бессонница", "не спится", "Не спится", "не Спится", "Не Спится", "не спишь", "Не спишь", "не Спишь", "Не Спишь", "сон для слабакоф", "сон для слабаков", "Сон для слабаков", "сон Для слабаков", "сон для Слабаков", "Сон Для Слабаков", "Сон для слабакоф"];
 
+const innovaWords =["Innova", "иннова", "Иннова", "инова", "Инова", "Inova", "inova", "innova"];
 
 robot.on('warn', () => { 
 console.warn
@@ -83,6 +85,28 @@ robot.on('guildMemberAdd', member => {
   });
 
 
+ robot.on('guildMemberRemove', member => {
+  const channel = member.guild.channels.find('name', 'chat');
+  if (!channel) return;
+  var textBaybay = [
+    `***${member.user.tag}*** Испугался Меня и вышел(`,
+    `***${member.user.tag}*** Покинул Сервер (наверно пошёл за рыбкой для меня :З)`,
+    `ой кто то по имени ***${member.user.tag}*** Решил убежать от меня, я всё ровно его найду!!!!`,
+    `***${member.user.tag}*** понял что он не исправим, решил здатся и ушел в неизвестность.`,
+    `***${member.user.tag}*** пришёл в ярость и ушел(наверно оО).`,
+    `***${member.user.tag}*** Покинул Сервер, Спасибо что воспользовались Системой Анти-Мата :З`,
+    `***${member.user.tag}*** Решил отсавить нас но, одному ему ведомой Причине`,
+    `***${member.user.tag}*** Ушел, Вернись мы всё простим!!!`,
+    `***${member.user.tag}*** не нашёл Себя у нас и нешил продолжить поиск в другом месте`,
+    `***${member.user.tag}*** Был слишком слаб, поэтому решил уйти`,
+    `***${member.user.tag}*** не нашёл слов и ушёл`,
+    `***${member.user.tag}*** отправился в далёкое путешествие`,
+    `***${member.user.tag}*** ушел... Бяка...`
+  ];
+  var rdED = Math.floor(Math.random()*textBaybay.length);
+  channel.send(`${textBaybay[rdED]}`)
+}); 
+  
   
   
 robot.on('message', async msg => {
@@ -203,6 +227,10 @@ robot.on('message', async msg => {
 		]
 	  })
 
+} else if ( sleepWords.some(word => msg.content.includes(word)) ) {
+	msg.channel.send('Быстро Спать! :bed:');
+} else if ( innovaWords.some(word => msg.content.includes(word)) ) {
+	msg.channel.send('Innova - Disconnected people :scream_cat: ');
 }
 });
 robot.login(process.env.TOKEN);
@@ -228,7 +256,7 @@ app.use(express.static(__dirname + '/public'));
 // set the home page route
 app.get('/', (request, response) => {
     // ejs render automatically looks in the views folder
-    response.render('hey');
+    response.render('public/Index.html');
 });
 
 app.listen(port, () => {
@@ -238,5 +266,5 @@ app.listen(port, () => {
 
 // pings server every 15 minutes to prevent dynos from sleeping
 setInterval(() => {
- http.get('http://avasional.herokuapp.com/');
+ http.get('http://antimatbot.herokuapp.com/');
 }, 900000);
