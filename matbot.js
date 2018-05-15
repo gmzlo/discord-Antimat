@@ -8,9 +8,9 @@ const fs = require("fs");
 
 const comBD = require('./data/comBD.json', 'utf8');
 
-const BotVersion = "0.0.19";
+const BotVersion = "0.0.22";
 
-const swearWords = ["гей", "пидор", "Пидор", "Гея", "гея", "Пидоры", "пидоры", "педик", "Педик", "Пидора", "проститука", "проституточка", "Проституточка", "проституток", "Проституток", "Проститука", "проституки", "Проституки", "задрот", "Задрот", "пидора", "пидарок", "Пидарок", "пидop", "Пидop", "Гей"];
+const swearWords = ["гей", "гeй", "Гeй", "г е й", "Г е й", "геи", "Геи", "гeи", "Гeи", "пидор", "Пидор", "Гея", "гея", "Пидоры", "пидоры", "педик", "Педик", "Пидора", "проститука", "проституточка", "Проституточка", "проституток", "Проституток", "Проститука", "проституки", "Проституки", "задрот", "Задрот", "пидора", "пидарок", "Пидарок", "пидop", "Пидop", "педор", "Педор", "пeдор", "Пeдор", "пeдoр", "Пeдoр", "педоp", "Педоp", "пeдоp", "Пeдоp", "Пeдop", "пeдop", "Гей"];
 
 const sleepWords =["не хочу спать", "Не хочу спать", "не хочу Спать", "Не Хочу Спать", "у меня безссоннится", "У меня безссоннится", "у Меня безссоннится", "у меня Безссоннится", "У Меня Безссоннится", "у меня бессонница", "у Меня бессонница", "у меня Бессонница", "У Меня Бессонница", "У меня бессонница", "не спится", "Не спится", "не Спится", "Не Спится", "не спишь", "Не спишь", "не Спишь", "Не Спишь", "сон для слабакоф", "сон для слабаков", "Сон для слабаков", "сон Для слабаков", "сон для Слабаков", "Сон Для Слабаков", "Сон для слабакоф"];
 
@@ -29,15 +29,16 @@ robot.channels.find("id", process.env.LOG_CHANNALE).send(`**Лог**: Функц
 });
 
 robot.on('ready', () => { 
-    robot.channels.find("id", process.env.LOG_CHANNALE).send(`**Лог**: Функция **ready** - Бот заходит на **${robot.user.username}  [ID ${robot.user.id}]**!
-	**log**: Функция **ready** - Работает для **${robot.guilds.size} Серверов**!
+robot.channels.find("id", process.env.LOG_CHANNALE).send(`
+**Лог**: Функция **ready** - Бот заходит на **${robot.user.username} [ID ${robot.user.id}]**!
+**log**: Функция **ready** - Работает для **${robot.guilds.size} Серверов**!
 **${robot.channels.size}** Каналов и **${robot.users.size}** Пользователей Подсчитано!
 **Лог**: Функция **set game** - присвоина игра **Анти Мат Фильтр**
 **Лог**: Функция **Version** - Автор бота = **Neko**
 Версия Бота = **${BotVersion}**
 -------------------------------------------------------------------`)
 robot.user.setGame("Анти Мат Фильтр")
-console.log(`Бот заходит на ${robot.user.username}  [ID ${robot.user.id}]!`)
+console.log(`Бот заходит на ${robot.user.username} [ID ${robot.user.id}]!`)
 console.log(`Работает для ${robot.guilds.size} Серверов!`)
 console.log(`${robot.channels.size} Каналов и ${robot.users.size} Пользователей Подсчитано!`)
 console.log(`присвоина игра Анти Мат Фильтр`)
@@ -89,19 +90,19 @@ robot.on('guildMemberAdd', member => {
   const channel = member.guild.channels.find('name', 'chat');
   if (!channel) return;
   var textBaybay = [
-    `***${member.user.tag}*** Испугался Меня и вышел(`,
-    `***${member.user.tag}*** Покинул Сервер (наверно пошёл за рыбкой для меня :З)`,
-    `ой кто то по имени ***${member.user.tag}*** Решил убежать от меня, я всё ровно его найду!!!!`,
-    `***${member.user.tag}*** понял что он не исправим, решил здатся и ушел в неизвестность.`,
-    `***${member.user.tag}*** пришёл в ярость и ушел(наверно оО).`,
-    `***${member.user.tag}*** Покинул Сервер, Спасибо что воспользовались Системой Анти-Мата :З`,
-    `***${member.user.tag}*** Решил отсавить нас но, одному ему ведомой Причине`,
-    `***${member.user.tag}*** Ушел, Вернись мы всё простим!!!`,
-    `***${member.user.tag}*** не нашёл Себя у нас и нешил продолжить поиск в другом месте`,
-    `***${member.user.tag}*** Был слишком слаб, поэтому решил уйти`,
-    `***${member.user.tag}*** не нашёл слов и ушёл`,
-    `***${member.user.tag}*** отправился в далёкое путешествие`,
-    `***${member.user.tag}*** ушел... Бяка...`
+    `**${member.user.tag}** Испугался Меня и вышел(`,
+    `**${member.user.tag}** Покинул Сервер (наверно пошёл за рыбкой для меня :З)`,
+    `ой кто то по имени **${member.user.tag}** Решил убежать от меня, я всё ровно его найду!!!!`,
+    `**${member.user.tag}** понял что он не исправим, решил здатся и ушел в неизвестность.`,
+    `**${member.user.tag}** пришёл в ярость и ушел(наверно оО).`,
+    `**${member.user.tag}** Покинул Сервер, Спасибо что воспользовались Системой Анти-Мата :З`,
+    `**${member.user.tag}** Решил отсавить нас но, одному ему ведомой Причине`,
+    `**${member.user.tag}** Ушел, Вернись мы всё простим!!!`,
+    `**${member.user.tag}** не нашёл Себя у нас и нешил продолжить поиск в другом месте`,
+    `**${member.user.tag}** Был слишком слаб, поэтому решил уйти`,
+    `**${member.user.tag}** не нашёл слов и ушёл`,
+    `**${member.user.tag}** отправился в далёкое путешествие`,
+    `**${member.user.tag}** ушел... Бяка...`
   ];
   var rdED = Math.floor(Math.random()*textBaybay.length);
   channel.send(`${textBaybay[rdED]}`)
@@ -136,18 +137,18 @@ robot.on('message', async msg => {
 	} else if(msg.content.startsWith("neko say")) {
 	msg.delete();
 	if (comBD.COMMAND_ACCES === "no") return robot.channels.find("id", process.env.LOG_CHANNALE).send({embed: {
-				"description": "Команда Say выключена",
+				"description": ":x: Команда Say выключена",
 				"color": 15337994,
 		}
 		});
 		if (msg.author.id == process.env.owner_id){
 			if (args[2] === undefined) return robot.channels.find("id", process.env.LOG_CHANNALE).send({embed: {
-				"description": "Ошибка синтаксита",
+				"description": ":x: Ошибка синтаксита",
 				"color": 15337994,
 		}
 		});
 		if (args[3] === undefined) return robot.channels.find("id", process.env.LOG_CHANNALE).send({embed: {
-			"description": "Ошибка синтаксита",
+			"description": ":x: Ошибка синтаксита",
 			"color": 15337994,
 	}
 	});
@@ -160,7 +161,7 @@ robot.on('message', async msg => {
 	}
 	else {
 		robot.channels.find("id", process.env.LOG_CHANNALE).send({embed: {
-			"description": "Ошибка синтаксита",
+			"description": ":x: Ошибка синтаксита",
 			"color": 15337994,
 	}
 	});
@@ -190,7 +191,7 @@ robot.on('message', async msg => {
 		comBD.COMMAND_ACCES = newAces;
 		fs.writeFile("./data/comBD.json", JSON.stringify(comBD), (error) => console.error);
 		if (comBD.COMMAND_ACCES === "no") return robot.channels.find("id", process.env.LOG_CHANNALE).send({embed: {
-				"description": "Изменение команды не произошло",
+				"description": ":x: Изменение команды не произошло",
 				"color": 15337994,
 		}
 		});
@@ -221,11 +222,32 @@ robot.on('message', async msg => {
 })}	
 } else if (msg.content.startsWith("neko fild")) {
 	msg.delete();
-	msg.channel.send(`Дорогие Девочки Администрация БШа поздравляет Вас с 8 МАРТА`, {
+	if (msg.author.id == process.env.owner_id){
+	if (args[2] === undefined) return msg.channel.send({embed: {
+			"description": ":x: Ошибка синтаксита",
+			"color": 15337994,
+	}
+	}).then(msg => msg.delete(3000));
+var GuildName = args[2];
+
+if	(GuildName === "EC") return msg.channel.send(`Дорогие Друзья Администрация Сервера(Дискорд) **${msg.guild.name}** поздравляет вас хоть и с прошедшим но 9 Мая :D `, {
 		files: [
-		  "./img/flover.jpg"
+		  "./img/9maya.png"
 		]
-	  })
+	  });
+if (GuildName === "Ce") return msg.channel.send(`Дорогие Друзья Администрация Сервера(Дискорд) **${msg.guild.name}** поздравляет вас хоть и с прошедшим но 9 Мая :D `, {
+		files: [
+		  "./img/9maya2.png"
+		]
+	  });
+if (GuildName === "all") {
+	msg.channel.send(`Дорогие Друзья Администрация Сервера(Дискорд) **${msg.guild.name}** поздравляет вас хоть и с прошедшим но 9 Мая :D `, {
+		files: [
+		  "./img/9maya3.png"
+		]
+	  }); 
+	}	
+}  
 
 } else if ( sleepWords.some(word => msg.content.includes(word)) ) {
 	msg.channel.send('Быстро Спать! :bed:');
@@ -234,6 +256,7 @@ robot.on('message', async msg => {
 }
 });
 robot.login(process.env.TOKEN);
+
 
 // Web app (Express + EJS)
 const http = require('http');
